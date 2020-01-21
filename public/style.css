@@ -10,9 +10,8 @@ body {
 }
 
 h1 {
-  color: #FFB03B;
+  color: #F55F20;
 }
-
 .post {
   margin: 10px;
   padding: 10px;
@@ -24,9 +23,9 @@ h1 {
 /*Header*/
 header{
   background: #FD9A24;
-  padding-top: 1px;
-  padding-bottom: 10px;
-  min-height: 50px;
+  padding-top: 2px;
+  padding-bottom: 15px;
+  min-height: 55px;
   border-bottom: #ffff 2px solid;
 }
 header a{
@@ -34,7 +33,11 @@ header a{
   text-decoration: none;
   text-transform: capitalize;
   font-size: 20px;
+}
+header a:hover{
+  color: #FFF0A5;
   font-weight: bold;
+  font-size: 22px;
 }
 header ul {
   margin-left: 1025px;
