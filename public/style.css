@@ -22,3 +22,7 @@ h1 {
 .time {
   color: lightskyblue;
 }
+
+.postId {
+  display: none;
+}

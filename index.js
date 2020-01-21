@@ -19,6 +19,13 @@ function sendPostsList(request, response) {
   response.send(posts)
 }
 app.get('/posts', sendPostsList)
+app.get('/post', function (request, response) {
+  let searchId = request.query.id;
+  let post = posts.find(x => x.id == searchId);
+  response.send(post);
+  console.log("Searching for post " + searchId);
+  response.send("fix this later");
+});
 
 // let a client POST something new
 function saveNewPost(request, response) {
@@ -28,6 +35,7 @@ function saveNewPost(request, response) {
   var dateTime = date + ' ' + time;
   console.log(request.body.message) // write it on the command prompt so we can see
   let post = {}
+  post.id = Math.round(Math.random() * 10000);
   post.message = request.body.message
   post.Image = request.body.image
   if (post.Image === "") {
