@@ -4,7 +4,9 @@
 <head>
   <meta charset='utf-8'>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <title>Message Feed</title>
+  <script src="/timeago.min.js"></script>
+  <title>Message Feed
+  </title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -20,10 +22,11 @@
       let postHTML =
         '<div class="post">'
         + '<div class="message">' + post.message + '</div>'
+        + '<div class="time">' + timeago.format(post.time) + '</div>'
         + '</div>'
 
       let messageList = document.querySelector(".message-list")
-      messageList.innerHTML += postHsTML
+      messageList.innerHTML += postHTML
     }
 
     function createFeed(posts) {
