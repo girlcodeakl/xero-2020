@@ -29,7 +29,10 @@ function saveNewPost(request, response) {
   console.log(request.body.message) // write it on the command prompt so we can see
   let post = {}
   post.message = request.body.message
-  post.Image = request.body.Image
+  post.Image = request.body.image
+  if (post.Image === "") {
+    post.Image = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Tarom.b737-700.yr-bgg.arp.jpg/1200px-Tarom.b737-700.yr-bgg.arp.jpg"
+  }
   post.time = dateTime;
   posts.push(post) // save it in our list
   response.send("thanks for your message. Press back to add another")
