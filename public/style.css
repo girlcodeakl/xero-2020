@@ -40,11 +40,11 @@ header a:hover{
   font-size: 22px;
 }
 header ul {
-  margin-left: 1025px;
+  text-align: right;
   padding: 0;
 }
 header li{
-  float: left;
+  float: right;
   display: inline;
   padding: 0 15px 0 15px;
 }
