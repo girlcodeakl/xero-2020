@@ -19,11 +19,11 @@
 
       let postHTML =
         '<div class="post">'
-        + '<div class="message">' + post + '</div>'
+        + '<div class="message">' + post.message + '</div>'
         + '</div>'
 
       let messageList = document.querySelector(".message-list")
-      messageList.innerHTML += postHTML
+      messageList.innerHTML += postHsTML
     }
 
     function createFeed(posts) {
