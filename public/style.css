@@ -1,5 +1,7 @@
 body {
   text-align: center;
+  font-family: 'Poppins';
+  background-color: #FD9A24;
 }
 
 .message-list {
@@ -8,15 +10,48 @@ body {
 }
 
 h1 {
-  color: #FFB03B;
+  color: #F55F20;
 }
-
 .post {
   margin: 10px;
   padding: 10px;
   border: 2px solid #FFB03B;
   border-radius: 5px;
   color: #468966;
+}
+
+/*Header*/
+header{
+  background: #FD9A24;
+  padding-top: 2px;
+  padding-bottom: 15px;
+  min-height: 55px;
+  border-bottom: #ffff 2px solid;
+}
+header a{
+  color: #F55F20;
+  text-decoration: none;
+  text-transform: capitalize;
+  font-size: 20px;
+}
+header a:hover{
+  color: #FFF0A5;
+  font-weight: bold;
+  font-size: 22px;
+}
+header ul {
+  text-align: right;
+  padding: 0;
+}
+header li{
+  float: right;
+  display: inline;
+  padding: 0 15px 0 15px;
+}
+header nav{
+  float: center;
+  margin: 10px auto 5px;
+  width: 100%;
 }
 
 .time {
