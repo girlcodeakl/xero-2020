@@ -4,9 +4,22 @@
 <head>
   <meta charset='utf-8'>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <header>
+    <div class="container">
+      <nav>
+        <ul>
+          <li><a href="index.html">home</a></li>
+          <li><a href="feed.html">read the feed</a></li>
+          <li><a href="post.html">post something</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
   <form method="post" action="/posts">
     <input type="text" name="message" value="message goes here">
     <button>Post it!</button>

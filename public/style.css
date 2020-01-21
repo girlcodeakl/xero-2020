@@ -1,5 +1,7 @@
 body {
   text-align: center;
+  font-family: 'Poppins';
+  background-color: #FD9A24;
 }
 
 .message-list {
@@ -17,4 +19,34 @@ h1 {
   border: 2px solid #FFB03B;
   border-radius: 5px;
   color: #468966;
+}
+
+/*Header*/
+header{
+  background: #FD9A24;
+  padding-top: 1px;
+  padding-bottom: 10px;
+  min-height: 50px;
+  border-bottom: #ffff 2px solid;
+}
+header a{
+  color: #F55F20;
+  text-decoration: none;
+  text-transform: capitalize;
+  font-size: 20px;
+  font-weight: bold;
+}
+header ul {
+  margin-left: 1025px;
+  padding: 0;
+}
+header li{
+  float: left;
+  display: inline;
+  padding: 0 15px 0 15px;
+}
+header nav{
+  float: center;
+  margin: 10px auto 5px;
+  width: 100%;
 }
