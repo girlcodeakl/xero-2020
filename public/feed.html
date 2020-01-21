@@ -20,10 +20,11 @@
       let postHTML =
         '<div class="post">'
         + '<div class="message">' + post.message + '</div>'
+        + '  <img src=' + post.Image + '>'
         + '</div>'
 
       let messageList = document.querySelector(".message-list")
-      messageList.innerHTML += postHsTML
+      messageList.innerHTML += postHTML
     }
 
     function createFeed(posts) {
