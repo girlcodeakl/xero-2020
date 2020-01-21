@@ -53,3 +53,11 @@ header nav{
   margin: 10px auto 5px;
   width: 100%;
 }
+
+.time {
+  color: lightskyblue;
+}
+
+.postId {
+  display: none;
+}
