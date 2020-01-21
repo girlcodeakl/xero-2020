@@ -41,7 +41,7 @@
       data.answer2 = document.querySelector(".answer2").value;
       data.answer3 = document.querySelector(".answer3").value;
       data.answer4 = document.querySelector(".answer4").value;
-      data.Image = document.querySelector(".image").value;
+      data.image = document.querySelector(".image").value;
       fetch("/posts", {
         method: "POST",
         body: JSON.stringify(data),

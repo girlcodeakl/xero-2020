@@ -37,9 +37,9 @@ function saveNewPost(request, response) {
   let post = {}
   post.id = Math.round(Math.random() * 10000);
   post.message = request.body.message
-  post.Image = request.body.image
-  if (post.Image === "") {
-    post.Image = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Tarom.b737-700.yr-bgg.arp.jpg/1200px-Tarom.b737-700.yr-bgg.arp.jpg"
+  post.image = request.body.image
+  if (post.image === "") {
+    post.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Tarom.b737-700.yr-bgg.arp.jpg/1200px-Tarom.b737-700.yr-bgg.arp.jpg"
   }
   post.time = dateTime;
   posts.push(post) // save it in our list
