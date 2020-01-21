@@ -27,6 +27,16 @@ function saveNewPost(request, response) {
   post.message = request.body.message
   posts.push(post) // save it in our list
   response.send("thanks for your message. Press back to add another")
+  console.log(request.body.question)
+  post.question = request.body.question
+  console.log(request.body.answer1)
+  post.answer1 = request.body.answer1
+  console.log(request.body.answer2)
+  post.answer2 = request.body.answer2
+  console.log(request.body.answer3)
+  post.answer3 = request.body.answer3
+  console.log(request.body.answer4)
+  post.answer4 = request.body.answer4
 }
 app.post('/posts', saveNewPost)
 

@@ -20,10 +20,20 @@
       let postHTML =
         '<div class="post">'
         + '<div class="message">' + post.message + '</div>'
+        + '<div class="question">' + post.question + '</div>'
+        + '<div>question goes here</div>'
+        + '<div class="answer1">' + post.answer1 + '</div>'
+        + '<div>answer one goes here</div>'
+        + '<div class="answer2">' + post.answer2 + '</div>'
+        + '<div>answer two goes here</div>'
+        + '<div class="answer3">' + post.answer3 + '</div>'
+        + '<div>answer three goes here</div>'
+        + '<div class="answer4">' + post.answer4 + '</div>'
+        + '<div>answer four goes here</div>'
         + '</div>'
 
       let messageList = document.querySelector(".message-list")
-      messageList.innerHTML += postHsTML
+      messageList.innerHTML += postHTML
     }
 
     function createFeed(posts) {
