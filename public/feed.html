@@ -32,7 +32,7 @@
     // Hello! This is the start of the JavaScript.
 
     function displayMessage(post) {
-      if (!post.answers) post.answer = ["1", "2", "3", "4"]
+      if (!post.answers) post.answers = ["1", "2", "3", "4"]
 
       let postHTML =
         '<div class="post">'
@@ -40,13 +40,13 @@
         + '  <img src=' + post.image + '>'
         + '<div class="question">' + post.question + '</div>'
         + '<div>question goes here</div>'
-        + '<div class="answer1 answerButton">' + post.answer[1] + '</div>'
+        + '<div class="answer1 answerButton">' + post.answers[1] + '</div>'
         + '<div>answer one goes here</div>'
-        + '<div class="answer2 answerButton">' + post.answer[2] + '</div>'
+        + '<div class="answer2 answerButton">' + post.answers[2] + '</div>'
         + '<div>answer two goes here</div>'
-        + '<div class="answer3 answerButton">' + post.answer[3] + '</div>'
+        + '<div class="answer3 answerButton">' + post.answers[3] + '</div>'
         + '<div>answer three goes here</div>'
-        + '<div class="answer4 answerButton">' + post.answer[4] + '</div>'
+        + '<div class="answer4 answerButton">' + post.answers[4] + '</div>'
         + '<div>answer four goes here</div>'
         + '<div class="time">' + timeago.format(post.time) + '</div>'
         + '<div class="postId">' + post.id + '</div>'
