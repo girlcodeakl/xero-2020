@@ -15,6 +15,9 @@
 
   <header>
     <div class="container">
+      <div class="topnav">
+      </div>
+
       <nav>
         <ul>
           <li><a href="feed.html">read the feed</a></li>
@@ -24,7 +27,7 @@
       </nav>
     </div>
   </header>
-
+  <input type="text" class="filter" placeholder="Search..">
   <h1 class="title">Message Feed</h1>
   <div class="message-list">
   </div>
@@ -32,6 +35,7 @@
     // Hello! This is the start of the JavaScript.
 
     function displayMessage(post) {
+      if (!post.answers) post.answers = ["1", "2", "3", "4"]
 
       let postHTML =
         '<div class="post">'
@@ -39,29 +43,73 @@
         + '  <img src=' + post.image + '>'
         + '<div class="question">' + post.question + '</div>'
         + '<div>question goes here</div>'
-        + '<div class="answer1">' + post.answer1 + '</div>'
+        + '<div class="answer1 answerButton" data-id="0">' + post.answers[0] + '</div>'
         + '<div>answer one goes here</div>'
-        + '<div class="answer2">' + post.answer2 + '</div>'
+        + '<div class="answer2 answerButton" data-id="1">' + post.answers[1] + '</div>'
         + '<div>answer two goes here</div>'
-        + '<div class="answer3">' + post.answer3 + '</div>'
+        + '<div class="answer3 answerButton" data-id="2">' + post.answers[2] + '</div>'
         + '<div>answer three goes here</div>'
-        + '<div class="answer4">' + post.answer4 + '</div>'
+        + '<div class="answer4 answerButton" data-id="3">' + post.answers[3] + '</div>'
         + '<div>answer four goes here</div>'
         + '<div class="time">' + timeago.format(post.time) + '</div>'
         + '<div class="postId">' + post.id + '</div>'
         + '</div>'
+        + '<div>' + post.author + '</div>'
 
       let messageList = document.querySelector(".message-list")
       messageList.innerHTML += postHTML
+
     }
+
+    function filterFeed() {
+      const searchtext = document.querySelector(".filter").value;
+      document.querySelectorAll(".post").forEach(function (element) {
+
+        if (element.innerHTML.toLowerCase().includes(searchtext.toLowerCase())) {
+          console.log("yes");
+          element.classList.remove("hidden");
+        } else {
+          console.log("no");
+          element.classList.add("hidden");
+        }
+        //code in here will be run once for each post
+      });
+    }
+
+    function messageListClick(e) {
+      if (e.target.classList.contains("answerButton")) {
+        console.log("button clicked!")
+        let answerNumber = e.target.dataset.id;
+        let postIdElement = e.target.parentNode.querySelector(".postId");
+        let postId = postIdElement.innerHTML;
+        let data = {};
+        data.answerNumber = answerNumber;
+        data.postId = postId;
+        fetch("/answerChosen", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json' }
+        });
+        e.preventDefault();
+        console.log("You chose post " + postId + ", answer " + answerNumber);
+      } else {
+        console.log("something else was clicked")
+      }
+    }
+
+    let messageList = document.querySelector(".message-list");
+    messageList.addEventListener("click", messageListClick);
+
 
     function createFeed(posts) {
+      posts.reverse();
       posts.forEach(displayMessage)
     }
-
+    document.querySelector(".filter").addEventListener("keyup", filterFeed);
     fetch("/posts")
       .then(response => response.json())
       .then(createFeed)
+
 
 // This is the end of the JavaScript.
   </script>

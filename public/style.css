@@ -43,8 +43,7 @@ header ul {
   text-align: right;
   padding: 0;
 }
-header li{
-  float: right;
+header li {
   display: inline;
   padding: 0 15px 0 15px;
 }
@@ -60,4 +59,18 @@ header nav{
 
 .postId {
   display: none;
+}
+
+.hidden {display: none}
+
+.answerButton {
+  color: lightskyblue;
+  font-weight: italic;
+  font-size: 15px;
+
+}
+.answerButton:hover {
+  color: lightskyblue;
+  font-weight: bold;
+  font-size: 22px;
 }

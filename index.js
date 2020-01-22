@@ -35,7 +35,9 @@ function saveNewPost(request, response) {
   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = date + ' ' + time;
   console.log(request.body.message) // write it on the command prompt so we can see
+  console.log(request.body.author)
   let post = {}
+  post.author = request.body.author;
   post.id = Math.round(Math.random() * 10000);
   post.message = request.body.message
   post.image = request.body.image
@@ -49,16 +51,30 @@ function saveNewPost(request, response) {
   console.log(request.body.question)
   post.question = request.body.question
   console.log(request.body.answer1)
-  post.answer1 = request.body.answer1
-  console.log(request.body.answer2)
-  post.answer2 = request.body.answer2
-  console.log(request.body.answer3)
-  post.answer3 = request.body.answer3
-  console.log(request.body.answer4)
-  post.answer4 = request.body.answer4
+  post.answers = []; // empty list
+  post.answers.push(request.body.answer1);
+  post.answers.push(request.body.answer2);
+  post.answers.push(request.body.answer3);
+  post.answers.push(request.body.answer4);
   databasePosts.insert(post);
 }
 app.post('/posts', saveNewPost)
+
+function answerChosen(request, response) {
+  console.log("Post id: " + request.body.postId);
+  console.log("Answer number: " + request.body.answerNumber);
+  response.send("ok");
+  let post = posts.find(x => x.id == request.body.postId);
+  let answerNumber = parseInt(request.body.answerNumber);
+  if (post.answerCount === undefined) {
+    post.answerCount = [0, 0, 0, 0]; //starting values
+    post.totalAnswers = 0;
+  }
+  post.answerCount[answerNumber]++; //increase counter by one
+  post.totalAnswers++; //increase counter by one
+  databasePosts.update({ id: post.id }, post);
+}
+app.post("/answerChosen", answerChosen);
 
 // listen for connections on port 3000
 app.listen(process.env.PORT || 3000)
