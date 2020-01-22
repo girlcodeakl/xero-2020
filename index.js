@@ -2,6 +2,7 @@
 let express = require('express')
 let app = express()
 let bodyParser = require('body-parser')
+let databasePosts = null;
 
 // If a client asks for a file,
 // look in the public folder. If it's there, give it to them.
@@ -42,6 +43,7 @@ function saveNewPost(request, response) {
   post.image = request.body.image
   if (post.image === "") {
     post.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Tarom.b737-700.yr-bgg.arp.jpg/1200px-Tarom.b737-700.yr-bgg.arp.jpg"
+
   }
   post.time = dateTime;
   posts.push(post) // save it in our list
@@ -54,6 +56,7 @@ function saveNewPost(request, response) {
   post.answers.push(request.body.answer2);
   post.answers.push(request.body.answer3);
   post.answers.push(request.body.answer4);
+  databasePosts.insert(post);
 }
 app.post('/posts', saveNewPost)
 
@@ -76,3 +79,19 @@ app.post("/answerChosen", answerChosen);
 // listen for connections on port 3000
 app.listen(process.env.PORT || 3000)
 console.log("Hi! I am listening at http://localhost:3000")
+
+let MongoClient = require('mongodb').MongoClient;
+let databaseUrl = 'mongodb://girlcode:cats123@ds257698.mlab.com:57698/xero-2020';
+let databaseName = 'xero-2020';
+
+MongoClient.connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+  if (err) throw err;
+  console.log("yay we connected to the database");
+  let database = client.db(databaseName);
+  databasePosts = database.collection('posts');
+  databasePosts.find({}).toArray(function (err, results) {
+    if (err) throw err;
+    console.log("Found " + results.length + " results");
+    posts = results
+  });
+});
