@@ -80,3 +80,19 @@ header nav{
   background: #DAEAEF;
   border-radius: 5px;
 }
+
+input {
+  border: 1px solid orange;
+  display: block;
+  background-color: white;
+  color: black;
+  margin:20px 
+}
+
+button {
+  display: block;
+ color: blue;
+ background-color: white;
+ border: 1px solid black;
+ font-size: 20px;
+}
