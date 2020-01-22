@@ -74,3 +74,9 @@ header nav{
   font-weight: bold;
   font-size: 22px;
 }
+
+.answerStat {
+  height: 30px;
+  background: #DAEAEF;
+  border-radius: 5px;
+}
