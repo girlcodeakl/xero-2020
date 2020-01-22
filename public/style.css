@@ -61,6 +61,8 @@ header nav{
   display: none;
 }
 
+.hidden {display: none}
+
 .answerButton {
   color: lightskyblue;
   font-weight: italic;

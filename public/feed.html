@@ -15,6 +15,9 @@
 
   <header>
     <div class="container">
+      <div class="topnav">
+      </div>
+
       <nav>
         <ul>
           <li><a href="feed.html">read the feed</a></li>
@@ -24,7 +27,7 @@
       </nav>
     </div>
   </header>
-
+  <input type="text" class="filter" placeholder="Search..">
   <h1 class="title">Message Feed</h1>
   <div class="message-list">
   </div>
@@ -55,6 +58,22 @@
 
       let messageList = document.querySelector(".message-list")
       messageList.innerHTML += postHTML
+
+    }
+
+    function filterFeed() {
+      const searchtext = document.querySelector(".filter").value;
+      document.querySelectorAll(".post").forEach(function (element) {
+
+        if (element.innerHTML.toLowerCase().includes(searchtext.toLowerCase())) {
+          console.log("yes");
+          element.classList.remove("hidden");
+        } else {
+          console.log("no");
+          element.classList.add("hidden");
+        }
+        //code in here will be run once for each post
+      });
     }
 
     function messageListClick(e) {
@@ -81,14 +100,16 @@
     let messageList = document.querySelector(".message-list");
     messageList.addEventListener("click", messageListClick);
 
+
     function createFeed(posts) {
       posts.reverse();
       posts.forEach(displayMessage)
     }
-
+    document.querySelector(".filter").addEventListener("keyup", filterFeed);
     fetch("/posts")
       .then(response => response.json())
       .then(createFeed)
+
 
 // This is the end of the JavaScript.
   </script>
