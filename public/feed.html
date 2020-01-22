@@ -25,6 +25,7 @@
         + '  <img src=' + post.Image + '>'
         + '<div class="time">' + timeago.format(post.time) + '</div>'
         + '</div>'
+        + '<div>' + post.author + '</div>'
 
       let messageList = document.querySelector(".message-list")
       messageList.innerHTML += postHTML
