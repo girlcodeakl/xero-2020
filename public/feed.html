@@ -68,6 +68,7 @@
     messageList.addEventListener("click", messageListClick);
 
     function createFeed(posts) {
+      posts.reverse();
       posts.forEach(displayMessage)
     }
 
