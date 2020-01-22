@@ -96,3 +96,11 @@ button {
  border: 1px solid black;
  font-size: 20px;
 }
+
+.unanswered .answerStat {
+  display: none;
+}
+
+.answered .answerButton {
+  display: none;
+}
