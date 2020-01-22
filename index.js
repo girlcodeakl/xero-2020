@@ -27,6 +27,9 @@ app.get('/post', function (request, response) {
   response.send("fix this later");
 });
 
+let messageList = document.querySelector(".message-list");
+messageList.addEventListener("click", messageListClick);
+
 // let a client POST something new
 function saveNewPost(request, response) {
   var today = new Date();
@@ -34,7 +37,9 @@ function saveNewPost(request, response) {
   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = date + ' ' + time;
   console.log(request.body.message) // write it on the command prompt so we can see
+  console.log(request.body.author)
   let post = {}
+  post.author = request.body.author;
   post.id = Math.round(Math.random() * 10000);
   post.message = request.body.message
   post.image = request.body.image
