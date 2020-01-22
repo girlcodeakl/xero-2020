@@ -23,6 +23,7 @@
   <div class="note"></div>
   <form method="post" action="/posts">
     <input class="messageInput" type="text" name="message" placeholder="Insert message">
+    <input class="nameInput" type="text" name="author" placeholder="enter name">
     <input type="text" name="question" placeholder="Enter question here!" class="question">
     <input type="text" name="answer1" placeholder="Question 1" class="answer1">
     <input type="text" name="answer2" placeholder="Question 2" class="answer2">
@@ -35,6 +36,7 @@
     function sendMessageToServer(e) {
       document.querySelector(".note").innerHTML = "Thanks! Your message was saved!";
       let data = {};
+      data.author = document.querySelector(".nameInput").value;
       data.message = document.querySelector(".messageInput").value;
       data.question = document.querySelector(".question").value;
       data.answer1 = document.querySelector(".answer1").value;

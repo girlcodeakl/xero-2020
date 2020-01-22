@@ -51,6 +51,7 @@
         + '<div class="time">' + timeago.format(post.time) + '</div>'
         + '<div class="postId">' + post.id + '</div>'
         + '</div>'
+        + '<div>' + post.author + '</div>'
 
       let messageList = document.querySelector(".message-list")
       messageList.innerHTML += postHTML

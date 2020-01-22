@@ -37,7 +37,9 @@ function saveNewPost(request, response) {
   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = date + ' ' + time;
   console.log(request.body.message) // write it on the command prompt so we can see
+  console.log(request.body.author)
   let post = {}
+  post.author = request.body.author;
   post.id = Math.round(Math.random() * 10000);
   post.message = request.body.message
   post.image = request.body.image
