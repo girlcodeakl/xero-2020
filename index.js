@@ -27,6 +27,9 @@ app.get('/post', function (request, response) {
   response.send("fix this later");
 });
 
+let messageList = document.querySelector(".message-list");
+messageList.addEventListener("click", messageListClick);
+
 // let a client POST something new
 function saveNewPost(request, response) {
   var today = new Date();

@@ -32,6 +32,7 @@
     // Hello! This is the start of the JavaScript.
 
     function displayMessage(post) {
+      if (!post.answers) post.answer = ["1", "2", "3", "4"]
 
       let postHTML =
         '<div class="post">'
@@ -39,13 +40,13 @@
         + '  <img src=' + post.image + '>'
         + '<div class="question">' + post.question + '</div>'
         + '<div>question goes here</div>'
-        + '<div class="answer1">' + post.answer1 + '</div>'
+        + '<div class="answer1 answerButton">' + post.answer[1] + '</div>'
         + '<div>answer one goes here</div>'
-        + '<div class="answer2">' + post.answer2 + '</div>'
+        + '<div class="answer2 answerButton">' + post.answer[2] + '</div>'
         + '<div>answer two goes here</div>'
-        + '<div class="answer3">' + post.answer3 + '</div>'
+        + '<div class="answer3 answerButton">' + post.answer[3] + '</div>'
         + '<div>answer three goes here</div>'
-        + '<div class="answer4">' + post.answer4 + '</div>'
+        + '<div class="answer4 answerButton">' + post.answer[4] + '</div>'
         + '<div>answer four goes here</div>'
         + '<div class="time">' + timeago.format(post.time) + '</div>'
         + '<div class="postId">' + post.id + '</div>'
@@ -54,6 +55,17 @@
       let messageList = document.querySelector(".message-list")
       messageList.innerHTML += postHTML
     }
+
+    function messageListClick(e) {
+      if (e.target.classList.contains("answerButton")) {
+        console.log("button clicked!")
+      } else {
+        console.log("something else was clicked")
+      }
+    }
+
+    let messageList = document.querySelector(".message-list");
+    messageList.addEventListener("click", messageListClick);
 
     function createFeed(posts) {
       posts.forEach(displayMessage)
