@@ -47,13 +47,11 @@ function saveNewPost(request, response) {
   console.log(request.body.question)
   post.question = request.body.question
   console.log(request.body.answer1)
-  post.answer1 = request.body.answer1
-  console.log(request.body.answer2)
-  post.answer2 = request.body.answer2
-  console.log(request.body.answer3)
-  post.answer3 = request.body.answer3
-  console.log(request.body.answer4)
-  post.answer4 = request.body.answer4
+  post.answers = []; // empty list
+  post.answers.push(request.body.answer1);
+  post.answers.push(request.body.answer2);
+  post.answers.push(request.body.answer3);
+  post.answers.push(request.body.answer4);
 }
 app.post('/posts', saveNewPost)
 
