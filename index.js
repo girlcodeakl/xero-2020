@@ -43,7 +43,7 @@ function saveNewPost(request, response) {
 
   }
   if (post.author === "") {
-    post.author = "guest";
+    post.author = "Guest";
   }
   post.time = today;
   posts.push(post) // save it in our list
