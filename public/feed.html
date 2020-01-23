@@ -43,26 +43,35 @@
       if (!post.answers) post.answers = ["1", "2", "3", "4"]
 
       let postHTML =
+
         '<div class="post unanswered">'
-        + '<div class="message">' + post.message + '</div>'
-        + '<img src=' + post.image + '>'
+        + '<div>' + post.author + '</div>'
+
+        + '<div class="imgpoll">'
+        + '  <img src=' + post.image + '>'
+        + '<div class="qANDa">'
         + '<div class="question">' + post.question + '</div>'
+
         + '<div class="answer1 answerButton" data-id="0">' + post.answers[0] + '</div>'
         + '<div class="answer2 answerButton" data-id="1">' + post.answers[1] + '</div>'
         + '<div class="answer3 answerButton" data-id="2">' + post.answers[2] + '</div>'
         + '<div class="answer4 answerButton" data-id="3">' + post.answers[3] + '</div>'
-        + '<div class="time">' + timeago.format(post.time) + '</div>'
-        + '<div class="postId">' + post.id + '</div>'
+
         + '<div class="stats">'
         + '<div class="answerStat" style="width:' + (post.answerCount[0] / post.totalAnswers * 100) + '%">' + post.answers[0] + '</div>'
         + '<div class="answerStat" style="width:' + (post.answerCount[1] / post.totalAnswers * 100) + '%">' + post.answers[1] + '</div>'
         + '<div class="answerStat" style="width:' + (post.answerCount[2] / post.totalAnswers * 100) + '%">' + post.answers[2] + '</div>'
         + '<div class="answerStat" style="width:' + (post.answerCount[3] / post.totalAnswers * 100) + '%">' + post.answers[3] + '</div>'
         + '</div>'
+        + '<input class="messageInput" type="text" name="message" placeholder="Add comment!">'
+        + '<button class="messagebutton"> reply </button>'
+        + '</div>'
         + '</div>'
         + '<div>' + '<a href="feed.html?author=' + post.author + '">' + post.author + '</a>' + '</div>'
         + '<input class="messageInput" type="text" name="message" placeholder="Add comment!">'
         + '<button class="messagebutton"> reply </button>'
+        + '<div class="time">' + timeago.format(post.time) + '</div>'
+        + '<div class="postId">' + post.id + '</div>'
         + '</div>'
       let messageList = document.querySelector(".message-list")
       messageList.innerHTML += postHTML
@@ -90,7 +99,7 @@
         e.target.closest(".post").classList.remove("unanswered");
         e.target.closest(".post").classList.add("answered");
         let answerNumber = e.target.dataset.id;
-        let postIdElement = e.target.parentNode.querySelector(".postId");
+        let postIdElement = e.target.closest(".post").querySelector(".postId");
         let postId = postIdElement.innerHTML;
         let data = {};
         data.answerNumber = answerNumber;
