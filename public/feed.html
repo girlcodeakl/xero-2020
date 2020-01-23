@@ -121,7 +121,12 @@
           method: "POST",
           body: JSON.stringify(data),
           headers: { 'Content-Type': 'application/json' }
-        });
+        }).then(response => response.json())
+          .then(post => drawAnswers(postElement, post))
+
+        postElement.classList.add("unanswered");
+        postElement.classList.remove("answered");
+
 
         console.log("i asked the server to save your comment");
 
