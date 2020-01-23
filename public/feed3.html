@@ -30,7 +30,7 @@
     </header>
 
     <button class="showNextPost"> show new post</button>
-    <h1 class="title">Message Feed</h1>
+    <h1 class="title">Pictures and Captions</h1>
     <div class="message-list">
     </div>
     <script>
@@ -47,32 +47,26 @@
             let postHTML =
                 '<div class="post unanswered">'
                 + '<div>' + '<a href="feed.html?author=' + post.author + '">' + post.author + '</a>' + '</div>'
-
                 + '<div class="imgpoll">'
                 + '  <img src=' + post.image + '>'
                 + '<div class="qANDa">'
                 + '<div class="question">' + post.question + '</div>'
-            post.answers.forEach(drawAnswer) // draw each answer
-            function drawAnswer(answer, index) {
-                postHTML += '<div class="answer1 answerButton" data-id="' + index + '">' + answer + '</div>'
-            }
-            postHTML += '<div class="postId">' + post.id + '</div>'
-                + '<div class="stats">'
-            post.answerCount.forEach(drawGraph) //  each graph
-            function drawGraph(answerCount, index) {
-                postHTML += '<div class="answerStat" style="width:' + (answerCount / post.totalAnswers * 100) + '%">' + post.answers[index] + '</div>'
-            }
-            postHTML += '<input class="messageInput" type="text" name="message" placeholder="Add comment!">'
-                + '<button class="messagebutton"> reply </button>'
+                + '<div class="answers">'
                 + '</div>'
+                + '<input class="messageInput" type="text" name="message" placeholder="Add comment!">'
+                + '<button class="messagebutton"> reply </button>'
                 + '</div>'
                 + '</div>'
                 + '<div class="postId">' + post.id + '</div>'
                 + '<div class="time">' + timeago.format(post.time) + '</div>'
                 + '</div>'
                 + '</div>'
+                + '</div>'
             let messageList = document.querySelector(".message-list")
             messageList.innerHTML += postHTML
+            const posts = document.querySelectorAll('.post')
+            const postElement = posts[posts.length - 1]
+            drawAnswers(postElement, post)
         }
 
 
@@ -101,8 +95,9 @@
                 console.log("button clicked!")
                 e.target.closest(".post").classList.remove("unanswered");
                 e.target.closest(".post").classList.add("answered");
+                let postElement = e.target.closest('.post')
                 let answerNumber = e.target.dataset.id;
-                let postIdElement = e.target.closest(".post").querySelector(".postId");
+                let postIdElement = postElement.querySelector(".postId");
                 let postId = postIdElement.innerHTML;
                 let data = {};
                 data.answerNumber = answerNumber;
@@ -111,7 +106,9 @@
                     method: "POST",
                     body: JSON.stringify(data),
                     headers: { 'Content-Type': 'application/json' }
-                });
+                }).then(response => response.json())
+                    .then(post => drawAnswers(postElement, post))
+
                 e.preventDefault();
                 console.log("You chose post " + postId + ", answer " + answerNumber);
 
@@ -122,11 +119,41 @@
                 let postElement = e.target.closest('.post')
                 let postId = postElement.querySelector(".postId").innerHTML;
                 let comment = postElement.querySelector("input").value
-                alert("post id: " + postId + ", my comment: " + comment);
+
+                let data = {};
+                data.postId = postId;
+                data.comment = comment
+                fetch("/comment", {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: { 'Content-Type': 'application/json' }
+                }).then(response => response.json())
+                    .then(post => drawAnswers(postElement, post))
+
+                postElement.classList.add("unanswered");
+                postElement.classList.remove("answered");
+
+
+                console.log("i asked the server to save your comment");
 
             } else {
                 console.log("something else was clicked")
             }
+        }
+
+        function drawAnswers(postElement, post) {
+            let newHTML = ''
+            post.answers.forEach(drawAnswer) // draw each answer
+            function drawAnswer(answer, index) {
+                newHTML += '<div class="answer1 answerButton" data-id="' + index + '">' + answer + '</div>'
+            }
+            newHTML += '<div class="postId">' + post.id + '</div>'
+                + '<div class="stats">'
+            post.answerCount.forEach(drawGraph) //  each graph
+            function drawGraph(answerCount, index) {
+                newHTML += '<div class="answerStat" style="width:' + (answerCount / post.totalAnswers * 100) + '%">' + post.answers[index] + '</div>'
+            }
+            postElement.querySelector('.answers').innerHTML = newHTML
         }
 
         let messageList = document.querySelector(".message-list");
