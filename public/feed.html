@@ -113,7 +113,17 @@
         let postElement = e.target.closest('.post')
         let postId = postElement.querySelector(".postId").innerHTML;
         let comment = postElement.querySelector("input").value
-        alert("post id: " + postId + ", my comment: " + comment);
+
+        let data = {};
+        data.postId = postId;
+        data.comment = comment
+        fetch("/comment", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        console.log("i asked the server to save your comment");
 
       } else {
         console.log("something else was clicked")

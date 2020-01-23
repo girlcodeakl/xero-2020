@@ -42,6 +42,9 @@ function saveNewPost(request, response) {
     post.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Tarom.b737-700.yr-bgg.arp.jpg/1200px-Tarom.b737-700.yr-bgg.arp.jpg"
 
   }
+  if (post.author === "") {
+    post.author = "Guest";
+  }
   post.time = today;
   posts.push(post) // save it in our list
   response.send("thanks for your message. Press back to add another")
@@ -75,6 +78,15 @@ function answerChosen(request, response) {
   response.send(post);
 }
 app.post("/answerChosen", answerChosen);
+
+function commentHandler(request, response) {
+  let post = posts.find(x => x.id == request.body.postId);
+  post.answers.push(request.body.comment)
+  databasePosts.update({ id: parseInt(request.body.postId) }, post)
+
+  response.send("ok");
+}
+app.post("/comment", commentHandler);
 
 // let a client GET a specific author's posts
 function sendAuthorPosts(request, response) {
