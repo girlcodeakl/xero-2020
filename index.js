@@ -70,7 +70,6 @@ app.post('/posts', saveNewPost)
 function answerChosen(request, response) {
   console.log("Post id: " + request.body.postId);
   console.log("Answer number: " + request.body.answerNumber);
-  response.send("ok");
   let post = posts.find(x => x.id == request.body.postId);
   let answerNumber = parseInt(request.body.answerNumber);
   if (post.answerCount === undefined) {
@@ -83,6 +82,7 @@ function answerChosen(request, response) {
   post.answerCount[answerNumber]++; //increase counter by one
   post.totalAnswers++; //increase counter by one
   databasePosts.update({ id: post.id }, post);
+  response.send(post);
 }
 app.post("/answerChosen", answerChosen);
 
