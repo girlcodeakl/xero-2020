@@ -76,6 +76,12 @@ function answerChosen(request, response) {
 }
 app.post("/answerChosen", answerChosen);
 
+// let a client GET a specific author's posts
+function sendAuthorPosts(request, response) {
+  response.send(posts.filter(post => post.author === request.params.author))
+}
+app.get('/author/:author', sendAuthorPosts)
+
 // listen for connections on port 3000
 app.listen(process.env.PORT || 3000)
 console.log("Hi! I am listening at http://localhost:3000")
