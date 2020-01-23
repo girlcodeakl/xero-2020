@@ -1,11 +1,11 @@
 body {
   text-align: center;
-  font-family: 'Poppins';
-  background-color: #FD9A24;
+  font-family: 'poppins';
+  background-color: #9DBDC6;
 }
 
 .message-list {
-  background-color: #FFF0A5;
+  background-color: #FFFFFF;
   padding: 20px;
 }
 .imgpoll{ 
@@ -16,14 +16,14 @@ body {
 }
 
 h1 {
-  color: #F55F20;
+  color: #17202A;
 }
 .post {
   margin: 10px;
   padding: 10px;
-  border: 2px solid #FFB03B;
-  border-radius: 5px;
-  color: #468966;
+  border: 2px solid #17202A;
+  border-radius: 25px;
+  color: #17202A;
   
   display: flex; /* or inline-flex */
   flex-direction: column;
@@ -37,20 +37,20 @@ margin-right: 150px;
 
 /*Header*/
 header{
-  background: #FD9A24;
+  background: #FFFFFF;
   padding-top: 2px;
   padding-bottom: 15px;
   min-height: 55px;
-  border-bottom: #ffff 2px solid;
+  border-bottom: 2px #17202A solid;
 }
 header a{
-  color: #F55F20;
+  color: #17202A ;
   text-decoration: none;
   text-transform: capitalize;
   font-size: 20px;
 }
 header a:hover{
-  color: #FFF0A5;
+  color: #17202A ;
   font-weight: bold;
   font-size: 22px;
 }
@@ -69,7 +69,7 @@ header nav{
 }
 
 .time {
-  color: lightskyblue;
+  color: #17202A;
 }
 
 .postId {
@@ -79,13 +79,13 @@ header nav{
 .hidden {display: none}
 
 .answerButton {
-  color: lightskyblue;
+  color:#FF3D2E;
   font-weight: italic;
   font-size: 15px;
 
 }
 .answerButton:hover {
-  color: lightskyblue;
+  color: #FF3D2E;
   font-weight: bold;
   font-size: 22px;
 }
