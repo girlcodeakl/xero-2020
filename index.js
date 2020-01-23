@@ -42,6 +42,9 @@ function saveNewPost(request, response) {
     post.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Tarom.b737-700.yr-bgg.arp.jpg/1200px-Tarom.b737-700.yr-bgg.arp.jpg"
 
   }
+  if (post.author === "") {
+    post.author = "guest";
+  }
   post.time = today;
   posts.push(post) // save it in our list
   response.send("thanks for your message. Press back to add another")
