@@ -73,6 +73,8 @@ function answerChosen(request, response) {
   post.answerCount[answerNumber]++; //increase counter by one
   post.totalAnswers++; //increase counter by one
   databasePosts.update({ id: post.id }, post);
+  let button1 = document.querySelector(".button1")
+  button1.addEventListener("click", greeting)
 }
 app.post("/answerChosen", answerChosen);
 
@@ -94,4 +96,16 @@ MongoClient.connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: tr
     console.log("Found " + results.length + " results");
     posts = results
   });
+  //pick and return a random element from the given list
+  function pickRandomFrom(list) {
+    return list[Math.floor(Math.random() * list.length)];
+  };
+  //give the client a random post
+  function getRandomPost(request, response) {
+    let randomPost = pickRandomFrom(posts);
+    response.send(randomPost);
+  };
+
+  app.get('/random', getRandomPost);
+
 });
