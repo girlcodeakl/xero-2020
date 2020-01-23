@@ -54,7 +54,7 @@
       function drawAnswer(answer, index) {
         postHTML += '<div class="answer1 answerButton" data-id="' + index + '">' + answer + '</div>'
       }
-      + '<div class="postId">' + post.id + '</div>'
+      postHTML += '<div class="postId">' + post.id + '</div>'
         + '<div class="stats">'
       post.answerCount.forEach(drawGraph) //  each graph
       function drawGraph(answerCount, index) {

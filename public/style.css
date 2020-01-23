@@ -94,6 +94,7 @@ header nav{
   height: 30px;
   background: #DAEAEF;
   border-radius: 5px;
+  white-space: nowrap;
 }
 
 input {

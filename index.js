@@ -64,14 +64,15 @@ function answerChosen(request, response) {
   let post = posts.find(x => x.id == request.body.postId);
   let answerNumber = parseInt(request.body.answerNumber);
   if (post.answerCount === undefined) {
-    post.answerCount = [0, 0, 0, 0]; //starting values
+    post.answerCount = []; //starting values
     post.totalAnswers = 0;
+  }
+  if (!post.answerCount[answerNumber]) {
+    post.answerCount[answerNumber] = 0
   }
   post.answerCount[answerNumber]++; //increase counter by one
   post.totalAnswers++; //increase counter by one
   databasePosts.update({ id: post.id }, post);
-  let button1 = document.querySelector(".button1")
-  button1.addEventListener("click", greeting)
 }
 app.post("/answerChosen", answerChosen);
 
