@@ -51,10 +51,18 @@ function saveNewPost(request, response) {
   post.question = request.body.question
   console.log(request.body.answer1)
   post.answers = []; // empty list
-  post.answers.push(request.body.answer1);
-  post.answers.push(request.body.answer2);
-  post.answers.push(request.body.answer3);
-  post.answers.push(request.body.answer4);
+  if (request.body.answer1 !== "") {
+    post.answers.push(request.body.answer1);
+  }
+  if (request.body.answer2 !== "") {
+    post.answers.push(request.body.answer2);
+  }
+  if (request.body.answer3 !== "") {
+    post.answers.push(request.body.answer3);
+  }
+  if (request.body.answer4 !== "") {
+    post.answers.push(request.body.answer4);
+  }
   databasePosts.insert(post);
 }
 app.post('/posts', saveNewPost)
