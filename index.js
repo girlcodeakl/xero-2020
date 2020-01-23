@@ -91,7 +91,7 @@ function commentHandler(request, response) {
   post.answers.push(request.body.comment)
   databasePosts.update({ id: parseInt(request.body.postId) }, post)
 
-  response.send("ok");
+  response.send(post);
 }
 app.post("/comment", commentHandler);
 
