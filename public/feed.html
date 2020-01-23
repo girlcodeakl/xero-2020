@@ -45,7 +45,7 @@
       let postHTML =
 
         '<div class="post unanswered">'
-        + '<div>' + post.author + '</div>'
+        + '<div>' + '<a href="feed.html?author=' + post.author + '">' + post.author + '</a>' + '</div>'
 
         + '<div class="imgpoll">'
         + '  <img src=' + post.image + '>'
@@ -63,15 +63,14 @@
       function drawGraph(answerCount, index) {
         postHTML += '<div class="answerStat" style="width:' + (answerCount / post.totalAnswers * 100) + '%">' + post.answers[index] + '</div>'
       }
-
-      postHTML += '</div>'
-        + '</div>'
-        + '<div>' + post.author + '</div>'
-        + '<input class="messageInput" type="text" name="message" placeholder="Add comment!">'
+      postHTML += '<input class="messageInput" type="text" name="message" placeholder="Add comment!">'
         + '<button class="messagebutton"> reply </button>'
+
         + '</div>'
         + '</div>'
-        + '<div>' + '<a href="feed.html?author=' + post.author + '">' + post.author + '</a>' + '</div>'
+        + '</div>'
+        + '</div>'
+
         + '<div class="time">' + timeago.format(post.time) + '</div>'
         + '<div class="postId">' + post.id + '</div>'
         + '</div>'
