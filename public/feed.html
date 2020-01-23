@@ -43,7 +43,6 @@
       if (!post.answers) post.answers = ["1", "2", "3", "4"]
 
       let postHTML =
-
         '<div class="post unanswered">'
         + '<div>' + '<a href="feed.html?author=' + post.author + '">' + post.author + '</a>' + '</div>'
 
@@ -52,12 +51,10 @@
         + '<div class="qANDa">'
         + '<div class="question">' + post.question + '</div>'
       post.answers.forEach(drawAnswer) // draw each answer
-
       function drawAnswer(answer, index) {
         postHTML += '<div class="answer1 answerButton" data-id="' + index + '">' + answer + '</div>'
       }
-      postHTML += '<div class="time">' + timeago.format(post.time) + '</div>'
-        + '<div class="postId">' + post.id + '</div>'
+      + '<div class="postId">' + post.id + '</div>'
         + '<div class="stats">'
       post.answerCount.forEach(drawGraph) //  each graph
       function drawGraph(answerCount, index) {
@@ -65,14 +62,12 @@
       }
       postHTML += '<input class="messageInput" type="text" name="message" placeholder="Add comment!">'
         + '<button class="messagebutton"> reply </button>'
-
         + '</div>'
         + '</div>'
         + '</div>'
         + '</div>'
-
-        + '<div class="time">' + timeago.format(post.time) + '</div>'
         + '<div class="postId">' + post.id + '</div>'
+      postHTML += '<div class="time">' + timeago.format(post.time) + '</div>'
         + '</div>'
       let messageList = document.querySelector(".message-list")
       messageList.innerHTML += postHTML
