@@ -121,6 +121,25 @@ MongoClient.connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: tr
     response.send(randomPost);
   };
 
+  function deleteHandler(request, response) {
+    console.log("client wants to delete this post: " + request.body.postId);
+    //code goes here
+    let postIdNumber = parseInt(request.body.postId);
+
+    if (request.body.password === "GirlCode") {
+      databasePosts.deleteOne({ id: postIdNumber })
+      response.send("will delete");
+      posts = posts.filter(post => post.id != postIdNumber);
+      //things that happen if the password was correct
+    } else {
+      console.log("Wrong password");
+      response.send("Wrong password");
+    }
+
+
+  }
+  app.post("/delete", deleteHandler);
+
   app.get('/random', getRandomPost);
 
 });

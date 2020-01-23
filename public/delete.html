@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="feed.html">read the feed</a></li>
+                    <li><a href="post.html">post something</a></li>
+                    <li><a href="index.html">home</a></li>
+                    <li><a href="delete.html">delete posts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="note"></div>
+    <form method="POST" action="/delete">
+        <label for="postIdinput">Post id</label>
+        <input class="postIdinput" type="text" id="postIdinput" name="postId">
+        <label for="pass">Password (8 characters minimum):</label>
+        <input type="password" id="pass" name="password" minlength="8" required>
+        <button class="deleteButton">Delete post</button>
+    </form>
+    <script>
+        function sendMessageToServer(e) {
+            document.querySelector(".note").innerHTML = "Deleting a message";
+            let data = {};
+            data.postId = document.querySelector(".postId").value;
+            data.password = document.querySelector(".password").value;
+            fetch("/delete", {
+                method: "DELETE",
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            e.preventDefault();
+
+        }
+        document.querySelector(".deleteButton").addEventListener("click", sendMessageToServer);
+
+    </script>
+</body>
+
+</html>
