@@ -136,18 +136,19 @@
             posts.reverse();
             posts.forEach(displayMessage)
         }
-        let url = new URL(window.location.href)
-        let author = url.searchParams.get("author")
-        if (author === null) {
-            fetch("/posts")
-                .then(response => response.json())
-                .then(createFeed)
-        } else {
-            fetch("/author/" + author)
-                .then(response => response.json())
-                .then(createFeed)
-        }
-
+        /*
+                let url = new URL(window.location.href)
+                let author = url.searchParams.get("author")
+                if (author === null) {
+                    fetch("/posts")
+                        .then(response => response.json())
+                        .then(createFeed)
+                } else {
+                    fetch("/author/" + author)
+                        .then(response => response.json())
+                        .then(createFeed)
+                }
+        */
         fetch("/random")
             .then(response => response.json())
             .then(displayMessage)
