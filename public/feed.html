@@ -65,6 +65,8 @@
         + '<div class="answerStat" style="width:' + (post.answerCount[2] / post.totalAnswers * 100) + '%">' + post.answers[2] + '</div>'
         + '<div class="answerStat" style="width:' + (post.answerCount[3] / post.totalAnswers * 100) + '%">' + post.answers[3] + '</div>'
         + '</div>'
+        + '<input class="messageInput" type="text" name="message" placeholder="Add comment!">'
+        + '<button class="messagebutton"> reply </button>'
         + '</div>'
         + '</div>'
 
@@ -74,8 +76,6 @@
 
 
         + '<div>' + post.author + '</div>'
-        + '<input class="messageInput" type="text" name="message" placeholder="Add comment!">'
-        + '<button class="messagebutton"> reply </button>'
         + '</div>'
       let messageList = document.querySelector(".message-list")
       messageList.innerHTML += postHTML
@@ -103,7 +103,7 @@
         e.target.closest(".post").classList.remove("unanswered");
         e.target.closest(".post").classList.add("answered");
         let answerNumber = e.target.dataset.id;
-        let postIdElement = e.target.parentNode.querySelector(".postId");
+        let postIdElement = e.target.closest(".post").querySelector(".postId");
         let postId = postIdElement.innerHTML;
         let data = {};
         data.answerNumber = answerNumber;
