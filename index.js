@@ -76,6 +76,15 @@ function answerChosen(request, response) {
 }
 app.post("/answerChosen", answerChosen);
 
+function commentHandler(request, response) {
+  let post = posts.find(x => x.id == request.body.postId);
+  post.answers.push(request.body.comment)
+  databasePosts.update({ id: parseInt(request.body.postId) }, post)
+
+  response.send("ok");
+}
+app.post("/comment", commentHandler);
+
 // let a client GET a specific author's posts
 function sendAuthorPosts(request, response) {
   response.send(posts.filter(post => post.author === request.params.author))
