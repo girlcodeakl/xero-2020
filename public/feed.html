@@ -35,26 +35,32 @@
     // Hello! This is the start of the JavaScript.
 
     function displayMessage(post) {
-
+      if (post.answerCount === undefined) {
+        post.answerCount = [0, 0, 0, 0];
+        post.totalAnswers = 0;
+      }
 
       if (!post.answers) post.answers = ["1", "2", "3", "4"]
 
       let postHTML =
-        '<div class="post">'
+        '<div class="post unanswered">'
         + '<div class="message">' + post.message + '</div>'
         + '  <img src=' + post.image + '>'
         + '<div class="question">' + post.question + '</div>'
-        + '<div>question goes here</div>'
         + '<div class="answer1 answerButton" data-id="0">' + post.answers[0] + '</div>'
-        + '<div>answer one goes here</div>'
         + '<div class="answer2 answerButton" data-id="1">' + post.answers[1] + '</div>'
-        + '<div>answer two goes here</div>'
         + '<div class="answer3 answerButton" data-id="2">' + post.answers[2] + '</div>'
-        + '<div>answer three goes here</div>'
         + '<div class="answer4 answerButton" data-id="3">' + post.answers[3] + '</div>'
-        + '<div>answer four goes here</div>'
         + '<div class="time">' + timeago.format(post.time) + '</div>'
         + '<div class="postId">' + post.id + '</div>'
+        + '<div class="stats">'
+        + '<div class="answerStat" style="width:' + (post.answerCount[0] / post.totalAnswers * 100) + '%">' + post.answers[0] + '</div>'
+        + '<div class="answerStat" style="width:' + (post.answerCount[1] / post.totalAnswers * 100) + '%">' + post.answers[1] + '</div>'
+        + '<div class="answerStat" style="width:' + (post.answerCount[2] / post.totalAnswers * 100) + '%">' + post.answers[2] + '</div>'
+        + '<div class="answerStat" style="width:' + (post.answerCount[3] / post.totalAnswers * 100) + '%">' + post.answers[3] + '</div>'
+        + '</div>'
+        + '</div>'
+        + '<div>' + post.author + '</div>'
 
         + '<div>' + post.author + '</div>'
         + '<input class="messageInput" type="text" name="message" placeholder="Add comment!">'
@@ -83,6 +89,8 @@
     function messageListClick(e) {
       if (e.target.classList.contains("answerButton")) {
         console.log("button clicked!")
+        e.target.closest(".post").classList.remove("unanswered");
+        e.target.closest(".post").classList.add("answered");
         let answerNumber = e.target.dataset.id;
         let postIdElement = e.target.parentNode.querySelector(".postId");
         let postId = postIdElement.innerHTML;
