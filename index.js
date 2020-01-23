@@ -70,8 +70,6 @@ function answerChosen(request, response) {
   post.answerCount[answerNumber]++; //increase counter by one
   post.totalAnswers++; //increase counter by one
   databasePosts.update({ id: post.id }, post);
-  let button1 = document.querySelector(".button1")
-  button1.addEventListener("click", greeting)
 }
 app.post("/answerChosen", answerChosen);
 
@@ -102,6 +100,25 @@ MongoClient.connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: tr
     let randomPost = pickRandomFrom(posts);
     response.send(randomPost);
   };
+
+  function deleteHandler(request, response) {
+    console.log("client wants to delete this post: " + request.body.postId);
+    //code goes here
+    let postIdNumber = parseInt(request.body.postId);
+
+    if (request.body.password === "GirlCode") {
+      databasePosts.deleteOne({ id: postIdNumber })
+      response.send("will delete");
+      posts = posts.filter(post => post.id != postIdNumber);
+      //things that happen if the password was correct
+    } else {
+      console.log("Wrong password");
+      response.send("Wrong password");
+    }
+
+
+  }
+  app.post("/delete", deleteHandler);
 
   app.get('/random', getRandomPost);
 
