@@ -5,8 +5,7 @@
     <meta charset='utf-8'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/timeago.min.js"></script>
-    <title>Message Feed
-    </title>
+    <title> Pictures and Captions </title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 </head>
@@ -149,6 +148,7 @@
             }
             newHTML += '<div class="postId">' + post.id + '</div>'
                 + '<div class="stats">'
+            if (!post.answerCount) post.answerCount = []
             post.answerCount.forEach(drawGraph) //  each graph
             function drawGraph(answerCount, index) {
                 newHTML += '<div class="answerStat" style="width:' + (answerCount / post.totalAnswers * 100) + '%">' + post.answers[index] + '</div>'
