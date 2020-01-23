@@ -58,6 +58,7 @@
             }
             postHTML += '<div class="postId">' + post.id + '</div>'
                 + '<div class="stats">'
+            if (!post.answerCount) post.answerCount = []
             post.answerCount.forEach(drawGraph) //  each graph
             function drawGraph(answerCount, index) {
                 postHTML += '<div class="answerStat" style="width:' + (answerCount / post.totalAnswers * 100) + '%">' + post.answers[index] + '</div>'
