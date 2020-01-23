@@ -45,13 +45,11 @@
       let postHTML =
 
         '<div class="post unanswered">'
-
         + '<div>' + post.author + '</div>'
 
         + '<div class="imgpoll">'
         + '  <img src=' + post.image + '>'
         + '<div class="qANDa">'
-
         + '<div class="question">' + post.question + '</div>'
         + '<div class="answer1 answerButton" data-id="0">' + post.answers[0] + '</div>'
         + '<div class="answer2 answerButton" data-id="1">' + post.answers[1] + '</div>'
@@ -67,13 +65,9 @@
         + '<button class="messagebutton"> reply </button>'
         + '</div>'
         + '</div>'
-
+        + '<div>' + '<a href="feed.html?author=' + post.author + '">' + post.author + '</a>' + '</div>'
         + '<div class="time">' + timeago.format(post.time) + '</div>'
         + '<div class="postId">' + post.id + '</div>'
-        + '</div>'
-
-
-        + '<div>' + post.author + '</div>'
         + '</div>'
       let messageList = document.querySelector(".message-list")
       messageList.innerHTML += postHTML
@@ -137,10 +131,17 @@
       posts.forEach(displayMessage)
     }
     document.querySelector(".filter").addEventListener("keyup", filterFeed);
-    fetch("/posts")
-      .then(response => response.json())
-      .then(createFeed)
-
+    let url = new URL(window.location.href)
+    let author = url.searchParams.get("author")
+    if (author === null) {
+      fetch("/posts")
+        .then(response => response.json())
+        .then(createFeed)
+    } else {
+      fetch("/author/" + author)
+        .then(response => response.json())
+        .then(createFeed)
+    }
 
 // This is the end of the JavaScript.
   </script>
