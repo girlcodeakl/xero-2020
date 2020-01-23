@@ -31,9 +31,6 @@ app.get('/post', function (request, response) {
 // let a client POST something new
 function saveNewPost(request, response) {
   var today = new Date();
-  var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  var dateTime = date + ' ' + time;
   console.log(request.body.message) // write it on the command prompt so we can see
   console.log(request.body.author)
   let post = {}
@@ -45,7 +42,7 @@ function saveNewPost(request, response) {
     post.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Tarom.b737-700.yr-bgg.arp.jpg/1200px-Tarom.b737-700.yr-bgg.arp.jpg"
 
   }
-  post.time = dateTime;
+  post.time = today;
   posts.push(post) // save it in our list
   response.send("thanks for your message. Press back to add another")
   console.log(request.body.question)
