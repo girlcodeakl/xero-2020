@@ -2,6 +2,7 @@
 let express = require('express')
 let app = express()
 let bodyParser = require('body-parser')
+let sanitizer = require('sanitizer')
 let databasePosts = null;
 
 // If a client asks for a file,
@@ -45,7 +46,6 @@ function saveNewPost(request, response) {
     post.author = "Guest";
   }
   post.time = today;
-  posts.push(post) // save it in our list
   response.send("thanks for your message. Press back to add another")
   console.log(request.body.question)
   post.question = request.body.question
@@ -63,6 +63,8 @@ function saveNewPost(request, response) {
   if (request.body.answer4 !== "") {
     post.answers.push(request.body.answer4);
   }
+  makePostSafe(post)
+  posts.push(post) // save it in our list
   databasePosts.insert(post);
 }
 app.post('/posts', saveNewPost)
@@ -88,7 +90,9 @@ app.post("/answerChosen", answerChosen);
 
 function commentHandler(request, response) {
   let post = posts.find(x => x.id == request.body.postId);
-  post.answers.push(request.body.comment)
+  let answer = request.body.comment
+  let safeAnswer = sanitizer.escape(answer)
+  post.answers.push(safeAnswer)
   databasePosts.update({ id: parseInt(request.body.postId) }, post)
 
   response.send(post);
@@ -100,6 +104,14 @@ function sendAuthorPosts(request, response) {
   response.send(posts.filter(post => post.author === request.params.author))
 }
 app.get('/author/:author', sendAuthorPosts)
+
+function makePostSafe(post) {
+  post.author = sanitizer.escape(post.author)
+  post.image = encodeURI(post.image)
+  post.answers.forEach((answer, i) => {
+    post.answers[i] = sanitizer.escape(answer)
+  })
+}
 
 // listen for connections on port 3000
 app.listen(process.env.PORT || 3000)
@@ -118,7 +130,11 @@ MongoClient.connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: tr
     if (err) throw err;
     console.log("Found " + results.length + " results");
     posts = results
+
+    // let's quickly clean up hostile data
+    posts.forEach(makePostSafe)
   });
+
   //pick and return a random element from the given list
   function pickRandomFrom(list) {
     return list[Math.floor(Math.random() * list.length)];
